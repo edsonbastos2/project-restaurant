@@ -1,18 +1,29 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container">
+      <Smothie/>
+    <h1>Home</h1>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-
+import Smothie from '../assets/icons/smothie.svg'
 export default {
-  name: 'Home',
-  components: {
-    HelloWorld
+    components:{
+        Smothie
+    }
+};
+</script>
+
+<style lang="less" scoped>
+.container {
+    svg{
+        path{
+            fill:red
+        }
+    }
+  h1 {
+    color: var(--pink);
+    font-size: 35px;
   }
 }
-</script>
+</style>
