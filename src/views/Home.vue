@@ -1,29 +1,17 @@
 <template>
   <div class="container">
-      <Smothie/>
-    <h1>Home</h1>
+      <CategoryMenu/>
   </div>
 </template>
 
 <script>
-import Smothie from '../assets/icons/smothie.svg'
+import CategoryMenu from '@/components/CategoryMenu.vue'
 export default {
-    components:{
-        Smothie
-    }
+  components:{
+    CategoryMenu
+  }
 };
 </script>
 
 <style lang="less" scoped>
-.container {
-    svg{
-        path{
-            fill:red
-        }
-    }
-  h1 {
-    color: var(--pink);
-    font-size: 35px;
-  }
-}
 </style>
