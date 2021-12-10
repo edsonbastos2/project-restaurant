@@ -7,8 +7,9 @@
     --lightGrey:#DADADA;
     --dark-Grey:#848484;
     --dark: #242424;
-    --yellow: #fdc844
+    --yellow: #fdc844;
 }
+
 
 *{
     box-sizing: border-box;
@@ -19,8 +20,15 @@
 body{
     font-family: 'Poppins', sans-serif;  
     background-color: var(--bgColor);
+
 }
 
 button, input, select, textarea{
     font-family: 'Poppins', sans-serif;
+}
+
+@media (max-width: 768px) {
+    body{
+        background-color: #fff;
+    }
 }

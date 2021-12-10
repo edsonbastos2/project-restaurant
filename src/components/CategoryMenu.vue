@@ -63,6 +63,23 @@ export default {
   display: flex;
   align-items: center;
 
+   @media (max-width: 768px){
+     width: 100%;
+     height: fit-content;
+     overflow-x: scroll;
+
+      ul{
+        display: flex;
+        justify-content: space-around;
+        margin: 20px;
+
+        li{
+          width: 78px;
+        }
+
+      }
+    }
+
   ul {
     list-style: none;
     width: 100%;
@@ -88,7 +105,7 @@ export default {
       }
       &.active{
           background-color: var(--yellow);
-          border-radius: 8px;
+          border-radius: 5px;
 
           p{
               color: #000;
