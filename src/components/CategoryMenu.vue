@@ -71,10 +71,19 @@ export default {
       ul{
         display: flex;
         justify-content: space-around;
-        margin: 20px;
+        margin: 0 30px;
+        gap: 0.75rem;
+
+        li:first-child{
+          margin-left: 50px;
+        }
+        li:last-child{
+          margin-right: 50px;
+        }
 
         li{
           width: 78px;
+          padding: 0.75rem;
         }
 
       }
