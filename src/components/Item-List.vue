@@ -1,5 +1,6 @@
 <template>
     <div class="item-list">
+        <Loading v-if="isLoading"/>
         <Item v-for="item in listItem" :key="item.id" :item="item"/>
     </div>
 </template>
@@ -7,22 +8,40 @@
 <script>
 import {api} from '@/services'
 import Item from './Item.vue'
+import Loading from './Loading.vue'
 export default {
     components:{
-        Item
+        Item,
+        Loading
     },
-   created(){
-    this.getProducts()
-  },
+   
   data(){
       return {
-          listItem:[]
+          listItem:[],
+          isLoading: false
       }
+  },
+  created(){},
+  computed:{
+    $selectCategory:{
+      get(){
+        return this.$store.state.selectedCategory
+      }
+    }
   },
   methods:{
     getProducts(){
-     api.get('burguers').then(resp => this.listItem = resp.data)
-     
+      this.isLoading = true
+      this.listItem = []
+      setTimeout(() => {
+        api.get(`${this.$selectCategory}`).then(resp => this.listItem = resp.data)
+        this.isLoading = false
+      }, 2000)
+    }
+  },
+  watch:{
+    $selectCategory(){
+      this.getProducts()
     }
   }
 }
@@ -32,6 +51,7 @@ export default {
 .item-list{
     margin: 40px;
     display: flex;
+    width: 100%;
     @media (max-width: 768px) {
     margin: 20px;
     flex-wrap: wrap;
