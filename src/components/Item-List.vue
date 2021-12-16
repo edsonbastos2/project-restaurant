@@ -23,10 +23,8 @@ export default {
   },
   created(){},
   computed:{
-    $selectCategory:{
-      get(){
+    $selectCategory(){
         return this.$store.state.selectedCategory
-      }
     }
   },
   methods:{
@@ -36,7 +34,7 @@ export default {
       setTimeout(() => {
         api.get(`${this.$selectCategory}`).then(resp => this.listItem = resp.data)
         this.isLoading = false
-      }, 2000)
+      }, 1000)
     }
   },
   watch:{
@@ -51,10 +49,10 @@ export default {
 .item-list{
     margin: 40px;
     display: flex;
-    width: 100%;
     @media (max-width: 768px) {
-    margin: 20px;
-    flex-wrap: wrap;
+      margin: 0;
+      padding: 20px;
+      flex-wrap: wrap;
   }
 }
 </style>
