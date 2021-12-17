@@ -49,6 +49,7 @@ export default {
 .item-list{
     margin: 40px;
     display: flex;
+    flex-wrap: wrap;
     @media (max-width: 768px) {
       margin: 0;
       padding: 20px;
