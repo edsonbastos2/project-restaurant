@@ -47,13 +47,17 @@ export default {
 
 <style lang="less" scoped>
 .item-list{
-    margin: 40px;
+    width: 100%;
+    margin: 50px;
     display: flex;
     flex-wrap: wrap;
+    align-content: flex-start;
+
     @media (max-width: 768px) {
+      flex-wrap: wrap;
       margin: 0;
       padding: 20px;
-      flex-wrap: wrap;
+      align-content: center;
   }
 }
 </style>

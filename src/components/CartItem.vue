@@ -26,11 +26,8 @@ export default {
         }
     },
     computed:{
-        selectedCategory(){
-            return this.$store.state.selectedCategory
-        },
         imagePath(){
-            return require(`@/assets/img/${this.selectedCategory}/${this.item.id}.png`)
+            return require(`@/assets/img/${this.item.id}.png`)
         }
     }
 }

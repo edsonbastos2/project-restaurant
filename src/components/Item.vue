@@ -26,11 +26,8 @@ export default {
         }
     },
     computed:{
-        $selectCategory(){
-            return this.$store.state.selectedCategory
-        },
         imgPath(){
-            return require(`@/assets/img/${this.$selectCategory}/${this.item.id}.png`)
+            return require(`@/assets/img/${this.item.id}.png`)
         }
     },
     methods:{
@@ -53,49 +50,51 @@ export default {
     display: flex;
     flex-direction: column;
 
-    &--name{
-        font-weight: 600;
-        font-size: 18px;
-        margin: 8px auto;
-    }
+        &--name{
+            font-weight: 600;
+            font-size: 18px;
+            margin: 8px auto;
+        }
 
-    &--tag{
-        background-color: var(--pink);
-        color: #fff;
-        position: absolute;
-        top:15px;
-        right: 15px;
-        border-radius: 8px;
-        font-weight: 500;
-        font-size: 12px;
-        padding: 3px 8px;
-    }
+        &--description{
+            color: var(--dark-Grey);
+            font-weight: 300;
+            font-size: 12px;
+            margin: 0;
+        }
 
-    &--img{
-        display: block;
-        width: 100%;
-        margin: 0;
-    }
+        &--price{
+            font-weight: 600;
+            font-size: 18px;
+            color: var(--yellow);
+        }
 
-    &--description{
-        color: var(--dark-Grey);
-        font-weight: 300;
-        font-size: 12px;
-        margin: 0;
-    }
+        &--tag{
+            background-color: var(--pink);
+            color: #fff;
+            position: absolute;
+            top:15px;
+            right: 15px;
+            border-radius: 8px;
+            font-weight: 500;
+            font-size: 12px;
+            padding: 3px 8px;
+        }
 
-    &--price{
-        font-weight: 600;
-        font-size: 18px;
-        color: var(--yellow);
-    }
+        &--img{
+            display: block;
+            width: 100%;
+            margin: 0;
+        }
 
-    .content{
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-    }
+        .content{
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+    
 
     @media (max-width: 768px) {
         width: 100%;
@@ -104,7 +103,7 @@ export default {
         display: flex;
         flex-direction: row;
         margin: 10px 0;
-        padding: 10px;
+        padding: 10px 20px;
 
         &--img{
             width: 86px;

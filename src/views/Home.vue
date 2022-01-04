@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="home">
       <CategoryMenu/>
       <ItemList/>
       <Cart/>
@@ -22,7 +22,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.container{
+.home{
   display: grid;
   grid-template-columns: 140px 1fr 643px;
 
