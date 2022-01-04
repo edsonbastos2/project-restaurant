@@ -13,7 +13,10 @@ export default new Vuex.Store({
       state.selectedCategory = payload
     },
     SET_ITEM_LIST(state, payload){
-      state.cartList.push(payload)
+      state.cartList.push({...payload, quantity:1})
+    },
+    increaseQuantity(state, index){
+      ++state.cartList[index].quantity
     }
   },
   actions: {
@@ -21,8 +24,10 @@ export default new Vuex.Store({
       context.commit('CHANGE_CATEGORY', payload)
     },
 
-    addCarlist(context, payload){
-      context.commit('SET_ITEM_LIST', payload)
+    addCarlist({state, commit}, payload){
+      const cartItem = state.cartList.find(cartItem => cartItem.id === payload.id)
+      const index = state.cartList.findIndex(cartItem => cartItem.id === payload.id)
+      cartItem ? commit('increaseQuantity', index) : commit('SET_ITEM_LIST', payload)
     }
   },
   modules: {
