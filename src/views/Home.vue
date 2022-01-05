@@ -2,7 +2,7 @@
   <div class="home">
       <CategoryMenu/>
       <ItemList/>
-      <Cart/>
+      <Cart v-if="isDesktop()"/>
   </div>
 </template>
 
@@ -10,6 +10,7 @@
 import CategoryMenu from '@/components/CategoryMenu.vue'
 import ItemList from '@/components/Item-List.vue'
 import Cart from '@/components/Cart.vue'
+import Mixins from '@/mixins/mixins'
 
 export default {
   components:{
@@ -17,7 +18,7 @@ export default {
     ItemList,
     Cart
   },
-  
+  mixins:[Mixins]
 };
 </script>
 
