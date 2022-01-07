@@ -111,5 +111,33 @@ export default {
         flex-grow: 1;
         padding: 0 20px;
     }
+
+    @media (max-width: 768px) {
+        flex-wrap: wrap;
+        &--img-container{
+            order: 1;
+        }
+
+        .content{
+            order: 2;
+            padding: 0 10px;
+        }
+
+        &--price{
+            order: 3;
+        }
+
+        &--quantity{
+            order: 4;
+            padding: 0;
+            width: 81px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+
+
+    }
 }
 </style>
