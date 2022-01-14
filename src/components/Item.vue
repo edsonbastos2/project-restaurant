@@ -24,11 +24,13 @@ export default {
     mixins:[Mixin],
     filters:{
         currency(value){
+            if(!value) return
             return `R$ ${value.toLocaleString('pt-br', {minimumFractionDigits:2})}`
         }
     },
     computed:{
         imgPath(){
+            if(!this.item?.id) return
             return require(`@/assets/img/${this.item.id}.png`)
         }
     },
