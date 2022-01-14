@@ -13,6 +13,7 @@
 </template>
 
 <script>
+import Mixin from '@/mixins/mixins.js'
 export default {
     props:{
         item:{ 
@@ -20,6 +21,7 @@ export default {
             required: true
         }
     },
+    mixins:[Mixin],
     filters:{
         currency(value){
             return `R$ ${value.toLocaleString('pt-br', {minimumFractionDigits:2})}`
@@ -33,6 +35,10 @@ export default {
     methods:{
         addToCart(){
             this.$store.dispatch('addCarlist', this.item)
+
+            if(this.isDesktop()) return 
+
+            this.$router.push({name:'AddToCard', params:{id: this.item.id}})
         }
     }
 }

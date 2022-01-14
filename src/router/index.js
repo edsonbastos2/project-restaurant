@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Cart from '@/components/Cart.vue'
+import AddToCard from '@/components/AddToCard.vue'
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,12 @@ const routes = [
     path: '/cart',
     name: 'Cart',
     component: Cart
+  },
+  {
+    path: '/addToCard/:id',
+    name: 'AddToCard',
+    component: AddToCard,
+    props: true
   },
 ]
 
