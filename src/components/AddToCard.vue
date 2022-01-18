@@ -4,10 +4,11 @@
         <Item :item="item" class="add-cart--item"/>
         <div class="add-cart--container">
             <span>Quantidade</span>
-            <Quantity :item="item"/>
+            <Quantity :item="item" :useStore="false"/>
         </div>
         <p class="add-cart--observation">Observação:</p>
         <textarea v-model="observation" rows="10"></textarea>
+        <button class="button btn" @click="onAddToCartButtonClick">Adicionar ao carrinho</button>
     </div>
 </template>
 
@@ -24,7 +25,9 @@ export default {
         Quantity
     },
     created(){
-         axios.get(`http://localhost:3000/${this.$selectCategory}/${this.id}`).then(resp => this.item = resp.data)
+         axios.get(`http://localhost:3000/${this.$selectCategory}/${this.id}`).then(resp => {
+             this.item = {...resp.data, quantity:1}
+         })
     },
     data(){
         return{
@@ -35,6 +38,12 @@ export default {
     computed:{
         $selectCategory(){
             return this.$store.state.selectedCategory
+        }
+    },
+    methods:{
+        onAddToCartButtonClick(){
+            this.$store.dispatch('addCarlist', this.item)
+            this.$router.push({name:'Home'})
         }
     }
 }
@@ -77,6 +86,14 @@ export default {
         width: 100%;
         border-radius: 8px;
         border: 1px solid var(--lightGrey);
+    }
+
+    .btn{
+        width: calc(100% - 40px);
+        position: fixed;
+        bottom: 30px;
+        left: 20px;
+        right: 20px;
     }
 }
 </style>

@@ -36,9 +36,10 @@ export default {
     },
     methods:{
         addToCart(){
-            this.$store.dispatch('addCarlist', this.item)
-
-            if(this.isDesktop()) return 
+            if(this.isDesktop()){
+                this.$store.dispatch('addCarlist', this.item)
+                return
+            } 
 
             this.$router.push({name:'AddToCard', params:{id: this.item.id}})
         }
