@@ -91,7 +91,7 @@ export default {
     .btn{
         width: calc(100% - 40px);
         position: fixed;
-        bottom: 30px;
+        bottom: 10px;
         left: 20px;
         right: 20px;
     }

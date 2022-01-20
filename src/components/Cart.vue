@@ -3,11 +3,17 @@
         <router-link to="/" class="cart--go-back" v-if="isMobile()">↩ Voltar</router-link>
         <h2 class="cart--title">Seu pedido</h2>
         <p v-if="noHasItem">Seu Carrinho ainda está vazio</p>
-        <CartItem v-for="item in $cartList" :key="item.id" :item="item"/>
+        <transition-group name="list">
+            <CartItem v-for="item in $cartList" :key="item.id" :item="item"/>
+        </transition-group>
         <div class="cart--total" v-if="!noHasItem">
             <span>Total: </span>
             <span class="price">{{$getTotal | currency}}</span>
         </div>
+        <button @click="showModal = true">Open</button>
+        <Modal :show="showModal" @on-modal-close="showModal = false">
+            Teste
+        </Modal>
     </div>
 </template>
 
@@ -15,11 +21,13 @@
 import CartItem from '@/components/CartItem.vue'
 import { mapGetters } from 'vuex'
 import Mixin from '@/mixins/mixins.js'
+import Modal from '@/components/Modal.vue'
 export default {
     name:'Cart',
 
     components:{
-        CartItem
+        CartItem,
+        Modal
     },
     mixins:[Mixin],
 
@@ -29,6 +37,11 @@ export default {
         }
     },
 
+    data(){
+        return{
+            showModal:false
+        }
+    },
     computed:{
         ...mapGetters(['$getTotal']),
         $cartList(){
@@ -36,7 +49,8 @@ export default {
         },
         noHasItem(){
             return !this.$cartList.length
-        }
+        },
+        
     }
 }
 </script>
@@ -71,6 +85,14 @@ export default {
             color: var(--yellow);
             padding-left: 10px;
         }
+    }
+
+    .list-enter-active, .list-leave-active {
+        transition: all 1s;
+    }
+    .list-enter, .list-leave-to /* .list-leave-active below version 2.1.8 */ {
+        opacity: 0;
+        transform: translateX(-30px);
     }
 
     @media (max-width: 768px) {
