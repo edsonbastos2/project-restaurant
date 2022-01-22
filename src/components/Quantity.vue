@@ -3,17 +3,33 @@
         <button class="buttons" @click="onDecreaseButtonClick" :disabled="item.quantity===0">-</button>
         <span class="number">{{item.quantity}}</span>
         <button class="buttons" @click="onIncreaseButtonClick">+</button>
+        <Modal :show="showModal">
+            <div class="modal--content">
+                <h2>Deseja excluir esse item do carrinho?</h2>
+                <button class="button-secondary" @click="onCancel">Cancelar</button>
+                <button class="button" @click="onRemoveItem">Sim, desejo!</button>
+            </div>
+        </Modal>
     </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
+import Modal from '@/components/Modal.vue'
 export default {
+    components:{
+        Modal
+    },
     props:{
         item:{},
         useStore:{
             type:Boolean,
             default: true
+        }
+    },
+    data(){
+        return{
+            showModal: false
         }
     },
     methods:{
@@ -24,6 +40,7 @@ export default {
         onDecreaseButtonClick(){
             if(this.useStore){
                 this.decreaseQuantity(this.item.id)
+                if(!this.item.quantity) this.showModal = true
                 return
             }
 
@@ -36,6 +53,16 @@ export default {
             }
 
             ++this.item.quantity
+        },
+        onCancel(){
+            this.increaseQuantity(this.item.id)
+            this.showModal = false
+        },
+        onRemoveItem(){
+            this.showModal = false
+            this.$nextTick(() => {
+                this.$store.dispatch('removeFromCart', this.item.id)
+            })
         }
     }
 }
@@ -61,6 +88,15 @@ export default {
             cursor: pointer;
             background: none;
             border: none;
+        }
+
+        .modal--content{
+            text-align: center;
+            button{
+                margin-left: 10px;
+                margin-top: 20px;
+                cursor: pointer;
+            }
         }
     }
 </style>

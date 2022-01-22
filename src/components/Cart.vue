@@ -10,10 +10,6 @@
             <span>Total: </span>
             <span class="price">{{$getTotal | currency}}</span>
         </div>
-        <button @click="showModal = true">Open</button>
-        <Modal :show="showModal" @on-modal-close="showModal = false">
-            Teste
-        </Modal>
     </div>
 </template>
 
@@ -21,25 +17,17 @@
 import CartItem from '@/components/CartItem.vue'
 import { mapGetters } from 'vuex'
 import Mixin from '@/mixins/mixins.js'
-import Modal from '@/components/Modal.vue'
 export default {
     name:'Cart',
 
     components:{
         CartItem,
-        Modal
     },
     mixins:[Mixin],
 
     filters:{
         currency(value){
             return `R$ ${value.toLocaleString('pt-br', {minimumFractionDigits:2})}`
-        }
-    },
-
-    data(){
-        return{
-            showModal:false
         }
     },
     computed:{

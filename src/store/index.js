@@ -14,7 +14,10 @@ export default new Vuex.Store({
     },
     SET_ITEM_LIST(state, payload){
       state.cartList.push({...payload, quantity: payload?.quantity || 1})
-    }, 
+    },
+    REMOVE_FROM_CART(state, payload){
+      state.cartList.splice(payload, 1)
+    },
     increaseQuantity(state, {index, quantity=1}){
       state.cartList[index].quantity += quantity
     },
@@ -36,6 +39,13 @@ export default new Vuex.Store({
 
       const index = state.cartList.findIndex(cartItem => cartItem.id === payload.id)
       commit('increaseQuantity', {index:index, quantity:payload?.quantity || 1})
+    },
+
+    removeFromCart({state, commit}, id){
+      const index = state.cartList.findIndex(cartItem => cartItem.id === id)
+      if(index !== -1){
+        commit('REMOVE_FROM_CART', index)
+      }
     },
 
     increaseQuantity({state,commit}, id){
