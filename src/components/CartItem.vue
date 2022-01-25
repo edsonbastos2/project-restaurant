@@ -6,15 +6,25 @@
         </div>
         <div class="content">
             <h3 class="item--name">{{item.name}}</h3>
-            <a class="item--observation">Adicionar observação</a>
+            <a class="item--observation" @click="openModalObservation">Adicionar observação</a>
+            <p class="item--observation-text">{{item.observation}}</p>
         </div>
         <p class="item--price">{{item.price | currency}}</p>
+        <Modal :show="showModal" @on-modal-close="closeModalObservation">
+            <div class="modal--container">
+                <h2>Adicionar Observação</h2>
+                <textarea v-model="item.observation" rows="10"></textarea>
+                <button class="button-secondary" @click="closeModalObservation">Cancela</button>
+                <button class="button" @click="addObservation">Salvar</button>
+            </div>
+        </Modal>
     </div>
 </template>
 
 <script>
 import { mapActions } from 'vuex'
 import Quantity from '@/components/Quantity.vue'
+import Modal from './Modal.vue'
 export default {
     name:'CartItem',
     props:{
@@ -23,8 +33,14 @@ export default {
             required: true
         }
     },
+    data(){
+        return{
+            showModal:false
+        }
+    },
     components:{
-        Quantity
+        Quantity,
+        Modal
     },
      filters:{
         currency(value){
@@ -40,7 +56,17 @@ export default {
         ...mapActions([
             'decreaseQuantity',
             'increaseQuantity'
-        ])
+        ]),
+        openModalObservation(){
+            this.showModal = true
+        },
+        closeModalObservation(){
+            this.showModal = false
+        },
+        addObservation(){
+            this.$store.dispatch('setObservation', this.item)
+            this.showModal = false
+        }
     }
 }
 </script>
@@ -99,6 +125,12 @@ export default {
         font-size: 12px;
         color: var(--dark-Grey);
         text-decoration: underline;
+        cursor:pointer;
+    }
+
+    &--observation-text{
+        font-size: 12px; 
+        color: var(--dark-Grey);
     }
 
     &--price{
@@ -110,6 +142,17 @@ export default {
     .content{
         flex-grow: 1;
         padding: 0 20px;
+    }
+
+    .modal--container{
+        text-align: center;
+        textarea{
+            margin-bottom: 20px;
+            width: 100%;
+        }
+        button + button{
+            margin-left: 15px;
+        }
     }
 
     @media (max-width: 768px) {
@@ -136,7 +179,11 @@ export default {
             justify-content: center;
         }
 
-
+        .modal--container{
+            textarea{
+                margin-bottom: 5px;
+            }
+        }
 
     }
 }

@@ -2,14 +2,17 @@
     <div class="cart">
         <router-link to="/" class="cart--go-back" v-if="isMobile()">↩ Voltar</router-link>
         <h2 class="cart--title">Seu pedido</h2>
-        <p v-if="noHasItem">Seu Carrinho ainda está vazio</p>
-        <transition-group name="list">
-            <CartItem v-for="item in $cartList" :key="item.id" :item="item"/>
-        </transition-group>
+        <div class="cart--content-payment">
+            <p v-if="noHasItem">Seu Carrinho ainda está vazio</p>
+            <transition-group name="list">
+                <CartItem v-for="item in $cartList" :key="item.id" :item="item"/>
+            </transition-group>
+        </div>
         <div class="cart--total" v-if="!noHasItem">
             <span>Total: </span>
             <span class="price">{{$getTotal | currency}}</span>
         </div>
+        <button class="button payment-button" @click="gotToPayment">Finalizar Compra</button>
     </div>
 </template>
 
@@ -39,6 +42,11 @@ export default {
             return !this.$cartList.length
         },
         
+    },
+    methods:{
+        gotToPayment(){
+            this.$router.push({name: 'Payment'})
+        }
     }
 }
 </script>
@@ -48,7 +56,10 @@ export default {
     background-color: #fff;
     width: 643px;
     min-width: 643px;
+    height: 100vh;
     padding: 50px;
+    display: flex;
+    flex-direction: column;
 
     &--go-back{
         text-decoration: none;
@@ -61,6 +72,11 @@ export default {
         font-size: 24px;
         font-weight: 600;
         margin-top: 40px;
+    }
+
+    &--content-payment{
+        flex-grow: 1;
+        overflow: auto;
     }
 
     &--total{
@@ -83,10 +99,19 @@ export default {
         transform: translateX(-30px);
     }
 
+    .payment-button{
+        width: 397px;
+        margin: 20px auto;
+    }
+
     @media (max-width: 768px) {
         width: 100%;
         min-width: unset;
         padding: 50px 20px 20px;
+
+        .payment-button{
+            width: 100%;
+        }
     }
 }
 </style>

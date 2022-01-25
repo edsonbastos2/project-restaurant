@@ -58,5 +58,12 @@ export default {
         text-align: right;
         cursor: pointer;
     }
+
+    @media (max-width: 768px){
+        &--content{
+            width: 90%;
+            padding: 15px;
+        }
+    }
 }
 </style>

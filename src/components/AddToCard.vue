@@ -7,7 +7,7 @@
             <Quantity :item="item" :useStore="false"/>
         </div>
         <p class="add-cart--observation">Observação:</p>
-        <textarea v-model="observation" rows="10"></textarea>
+        <textarea v-model="item.observation" rows="10"></textarea>
         <button class="button btn" @click="onAddToCartButtonClick">Adicionar ao carrinho</button>
     </div>
 </template>
@@ -26,13 +26,12 @@ export default {
     },
     created(){
          axios.get(`http://localhost:3000/${this.$selectCategory}/${this.id}`).then(resp => {
-             this.item = {...resp.data, quantity:1}
+             this.item = {...resp.data,observation:'', quantity:1}
          })
     },
     data(){
         return{
             item:{},
-            observation:''
         }
     },
     computed:{

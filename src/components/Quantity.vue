@@ -3,8 +3,8 @@
         <button class="buttons" @click="onDecreaseButtonClick" :disabled="item.quantity===0">-</button>
         <span class="number">{{item.quantity}}</span>
         <button class="buttons" @click="onIncreaseButtonClick">+</button>
-        <Modal :show="showModal">
-            <div class="modal--content">
+        <Modal :show="showModal" @on-modal-close="onCloseQuantity">
+            <div class="modal--container">
                 <h2>Deseja excluir esse item do carrinho?</h2>
                 <button class="button-secondary" @click="onCancel">Cancelar</button>
                 <button class="button" @click="onRemoveItem">Sim, desejo!</button>
@@ -63,7 +63,12 @@ export default {
             this.$nextTick(() => {
                 this.$store.dispatch('removeFromCart', this.item.id)
             })
+        },
+        onCloseQuantity(){
+            this.increaseQuantity(this.item.id)
+            this.showModal = false
         }
+
     }
 }
 </script>
@@ -90,8 +95,11 @@ export default {
             border: none;
         }
 
-        .modal--content{
+        .modal--container{
             text-align: center;
+            h2{
+                font-size: 20px;
+            }
             button{
                 margin-left: 10px;
                 margin-top: 20px;

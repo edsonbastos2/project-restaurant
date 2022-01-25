@@ -23,6 +23,9 @@ export default new Vuex.Store({
     },
     decreaseQuantity(state, index){
       --state.cartList[index].quantity
+    },
+    addObservation(state, {index, observation}){
+      state.cartList[index].observation = observation
     }
   },
   actions: {
@@ -39,6 +42,21 @@ export default new Vuex.Store({
 
       const index = state.cartList.findIndex(cartItem => cartItem.id === payload.id)
       commit('increaseQuantity', {index:index, quantity:payload?.quantity || 1})
+
+      if(payload.observation){
+        commit('addObservation',{
+          index:index,
+          observation: payload.observation
+        })
+      }
+    },
+
+    setObservation({state, commit}, payload){
+      const index = state.cartList.findIndex(cartItem => cartItem.id === payload.id)
+      commit('addObservation', {
+        index: index,
+        observation: payload.observation
+      })
     },
 
     removeFromCart({state, commit}, id){
