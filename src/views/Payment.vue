@@ -37,5 +37,11 @@ export default {
             }
         }
 
+        @media(max-width: 768px){
+            .payment--content{
+                padding: 50px 20px;
+            }
+        }
+
     }
 </style>
